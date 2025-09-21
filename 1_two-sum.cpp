@@ -1,9 +1,25 @@
 #include <bits/stdc++.h>
+#include <unordered_map>
 using namespace std; 
 
 // code_start
-
 class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> map;
+        for (int i=0; i<nums.size(); i++) {
+            auto iter = map.find(target - nums[i]);
+            if (iter != map.end())
+                return {iter->second, i};
+            else map.insert(pair<int, int>(nums[i], i));
+        }
+        return {};
+    }
+};
+
+// code_end
+
+class Solution2 {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         vector<int> ans; 
@@ -19,6 +35,4 @@ public:
         return ans;
     }
 };
-
-// code_end
 
