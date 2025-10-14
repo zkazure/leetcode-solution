@@ -20,7 +20,7 @@ public:
                     ans = i+1 - needle.size() -1 -needle.size();
                     break;
                 }
-            }
+            }p
         }
         return ans;
     }
