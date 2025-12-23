@@ -2,11 +2,11 @@
 using namespace std;
 
 struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+  int val;
+  ListNode *next;
+  ListNode() : val(0), next(nullptr) {}
+  ListNode(int x) : val(x), next(nullptr) {}
+  ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 // code_start
@@ -23,23 +23,42 @@ struct ListNode {
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        if (head==nullptr || head->next==nullptr)
-            return head;
-        
-        ListNode* cur = head->next, *pre = head;
-        pre->next = nullptr;
-        while (cur != nullptr) {
-            ListNode* tmp = cur->next;
-            cur->next = pre;
-            
-            pre = cur;
-            cur = tmp;
-        }
+  ListNode *reverseList(ListNode *head) {
+    if (head == nullptr || head->next == nullptr)
+      return head;
+    ListNode *cur = head->next;
+    ListNode *pre = head;
+    head->next = nullptr;
 
-        return pre;
+    while (cur) {
+      ListNode *node = cur->next;
+      cur->next = pre;
+      pre = cur;
+      cur = node;
     }
+
+    return pre;
+  }
 };
 
 // code_end
 
+class Solution1 {
+public:
+  ListNode *reverseList(ListNode *head) {
+    if (head == nullptr || head->next == nullptr)
+      return head;
+
+    ListNode *cur = head->next, *pre = head;
+    pre->next = nullptr;
+    while (cur != nullptr) {
+      ListNode *tmp = cur->next;
+      cur->next = pre;
+
+      pre = cur;
+      cur = tmp;
+    }
+
+    return pre;
+  }
+};
