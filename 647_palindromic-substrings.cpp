@@ -2,9 +2,38 @@
 using namespace std;
 
 // code_start
+class Solution {
+public:
+    int countSubstrings(string s) {
+        string str = "^";
+        for (char c : s) {
+            str += "#";
+            str += c;
+        }
+        str += "#$";
+
+        int len = str.length();
+        vector<int> p(len, 0);
+        int iMax = 0, rMax = 0;
+        int ans = 0;
+        for (int i = 1; i < len - 1; ++i) {
+            p[i] = (i <= rMax) ? min(rMax - i + 1, p[2 * iMax - i]) : 1;
+            while (str[i + p[i]] == str[i - p[i]]) {
+                p[i] += 1;
+            }
+            if (i + p[i] - 1 > rMax) {
+                iMax = i;
+                rMax = i + p[i] - 1;
+            }
+            ans += p[i] / 2;
+        }
+        return ans;
+    }
+};
+// code_end
 
 // 马拉车算法
-class Solution {
+class Solution2 {
 public:
     int countSubstrings(string s) {
         string str = "^";
@@ -76,7 +105,7 @@ public:
     }
 };
 
-// code_end
+
 
 int main() {
     Solution solution;
